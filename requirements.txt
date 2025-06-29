@@ -1,1 +1,6 @@
+bs4>=0.0.2
+mcp[cli]>=1.9.4
+requests>=2.32.4
+selenium>=4.33.0
+httpx>=0.27.0
 fastmcp==2.8.1
