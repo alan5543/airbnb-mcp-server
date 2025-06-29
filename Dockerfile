@@ -10,8 +10,8 @@ RUN pip install uv
 # Copy only the dependency files first to leverage Docker cache
 COPY pyproject.toml uv.lock ./
 
-# Install dependencies using uv
-RUN uv sync
+# Install dependencies using uv into the system Python environment
+RUN uv sync --system
 
 # Copy the rest of your application code
 COPY . .
