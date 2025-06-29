@@ -1,8 +1,12 @@
-# smithery.yaml
-version: 1
-build:
-  # Command to install dependencies
-  install: pip install -r requirements.txt
-  # Command to start your server
-  # We use the python file directly. Smithery handles the rest.
-  start: python main.py
+# /Users/alanyang/Desktop/travel_mcp/airbnb_mcp_server/smithery.yaml
+apiVersion: v1
+kind: McpServer
+metadata:
+  name: airbnb-scraper # This matches FastMCP("airbnb-scraper")
+  displayName: Airbnb Scraper
+  description: Tools to scrape real-time Airbnb listings and detailed information. This server does not require any API keys.
+  author: Alan Yang
+  # icon: https://example.com/your-airbnb-icon.png # Optional: A public URL to a small icon
+spec:
+  # For local servers, you typically don't need 'start' or 'configSchema'
+  # if there are no API keys. Smithery will use your README for setup instructions.
