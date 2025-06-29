@@ -37,9 +37,9 @@ async def get_page_html_async(url: str) -> str | None:
             response.raise_for_status()
             html_content = response.text
 
-            with open("debug_airbnb_page.html", "w", encoding="utf-8") as f:
-                f.write(html_content)
-            logger.info("Saved current page HTML to debug_airbnb_page.html for inspection.")
+            # with open("debug_airbnb_page.html", "w", encoding="utf-8") as f:
+            #     f.write(html_content)
+            # logger.info("Saved current page HTML to debug_airbnb_page.html for inspection.")
 
             return html_content
     except httpx.RequestError as e:

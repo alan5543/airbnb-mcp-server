@@ -1,12 +1,26 @@
-# /Users/alanyang/Desktop/travel_mcp/airbnb_mcp_server/smithery.yaml
-apiVersion: v1
-kind: McpServer
-metadata:
-  name: airbnb-scraper # This matches FastMCP("airbnb-scraper")
-  displayName: Airbnb Scraper
-  description: Tools to scrape real-time Airbnb listings and detailed information. This server does not require any API keys.
-  author: Alan Yang
-  # icon: https://example.com/your-airbnb-icon.png # Optional: A public URL to a small icon
-spec:
-  # For local servers, you typically don't need 'start' or 'configSchema'
-  # if there are no API keys. Smithery will use your README for setup instructions.
+runtime: "container"
+build:
+  dockerfile: "Dockerfile"          # Path to your Dockerfile
+  dockerBuildPath: "."              # Docker build context (current directory)
+startCommand:
+  type: "http"
+  configSchema:                     # JSON Schema for configuration
+    type: "object"
+    properties:
+      # Define any configuration parameters your MCP server might need.
+      # For example, if you had an API key for a third-party service:
+      # api_key:
+      #   type: "string"
+      #   description: "Your API key for the service."
+      #   secret: true # Mark as secret if it's sensitive
+      # If your server doesn't take any direct config parameters,
+      # you can leave properties empty or just specify common ones like:
+      log_level:
+        type: "string"
+        description: "Set the logging level (e.g., INFO, DEBUG)."
+        default: "INFO"
+    # required: ["api_key"] # Uncomment and list required fields here
+  exampleConfig:
+    # Provide an example configuration.
+    # log_level: "INFO"
+    # api_key: "sk-example123" # Use a placeholder for secrets
