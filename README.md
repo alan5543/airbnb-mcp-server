@@ -1,30 +1,57 @@
-# airbnb-mcp-server
-An MCP server for scraping Airbnb listings without requiring an API key, leveraging web scraping techniques to provide detailed accommodation data.
+# Airbnb MCP Server
 
-## Key Characteristics
-- **No API Key Required**: Utilizes web scraping (via BeautifulSoup, requests, and Selenium) since the Airbnb API is not publicly available, making it accessible without credentials.
-- **Real-Time Scraping**: Fetches live data from Airbnb, including listings, prices, and amenities, with robust error handling.
-- **Two Powerful Tools**:
-  - `search_airbnb_listings`: Scrapes multiple listings by location, dates, and filters, returning structured JSON data.
-  - `scrape_airbnb_listing_info`: Extracts comprehensive details from a single listing URL, providing a formatted text summary.
-- **Optimized for Telegram**: Designed for concise, sanitized output suitable for chat-based interfaces.
+An MCP (Model Context Protocol) server for scraping and searching Airbnb listings. This server provides tools that can be connected to Large Language Models (LLMs) and other AI agents to fetch real-time data from Airbnb.
 
-## Why This is Helpful
-While traditional platforms like Airbnb’s website require manual browsing, this MCP server acts as a virtual travel assistant in your AI client. It excels at:
-- **Contextual Searches**: Find listings based on natural language prompts without navigating complex interfaces.
-- **Flexible Date Ranges**: Search across multiple days to spot the best deals.
-- **Detailed Insights**: Access detailed listing info (e.g., amenities, host details) without visiting each page.
-Think of it as having a personal Airbnb scout in your chat, remembering your preferences and delivering results instantly!
+**Disclaimer:** This project is for educational purposes. Web scraping Airbnb is against their Terms of Service. The structure of Airbnb's website changes frequently, which can break this scraper at any time. Use at your own risk.
+
+---
 
 ## Features
-- Search listings by location, check-in/check-out dates, and guest numbers.
-- Filter by maximum price and page limit for tailored results.
-- Extract detailed info (e.g., beds, bathrooms, amenities) from individual listings.
-- Handle multi-page scraping with deduplication for unique results.
-- Save debug HTML (`debug_airbnb_page.html`) for troubleshooting.
+
+This server exposes two primary tools:
+
+1.  `search_airbnb_listings`: Searches for listings based on location, dates, and number of guests, returning a detailed JSON list of properties.
+2.  `scrape_airbnb_listing_info`: Fetches comprehensive details for a single Airbnb listing URL.
 
 ## Prerequisites
-- Python 3.13+
-- Install [uv](https://github.com/astral-sh/uv) for dependency management:
-  ```bash
-  curl -LsSf https://astral.sh/uv/install.sh | sh
+
+* Python 3.9+
+* Git
+
+## Installation and Local Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/YOUR_USERNAME/airbnb-mcp-server.git](https://github.com/YOUR_USERNAME/airbnb-mcp-server.git)
+    cd airbnb-mcp-server
+    ```
+
+2.  **Install the dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## How to Run the MCP Server
+
+You can run the server locally to test it. It will communicate over standard input/output (stdio), which is a common way for local agent frameworks to interact with it.
+
+```bash
+python main.py
+```
+
+The server is now running and waiting for MCP requests on stdio.
+
+## Configuration for an LLM Agent
+
+To allow an LLM to use your tools, you must provide it with the server's **schema**. The schema describes the available tools, their parameters, and what they return.
+
+1.  **Get the Schema:**
+    Run the following command in your terminal:
+    ```bash
+    mcp schema main:mcp
+    ```
+
+2.  **Use the Schema:**
+    The output of this command is a JSON object. This JSON is what you provide to your LLM or agent framework. For example, when configuring a custom GPT in OpenAI, you would paste this schema into the designated area.
+
+    This schema allows the LLM to understand how to call your `search_airbnb_listings` and `scrape_airbnb_listing_info` tools correctly.

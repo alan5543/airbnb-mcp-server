@@ -1,45 +1,8 @@
-name: airbnb-mcp-server
-version: 0.1.0
-description: MCP server for scraping Airbnb listings without an API key
-tools:
-  - name: search_airbnb_listings
-    description: Scrapes Airbnb listings by location, dates, and filters, returning detailed JSON data
-    parameters:
-      - name: place
-        type: string
-        description: English name of the location (e.g., "Hong Kong")
-      - name: checkin_date
-        type: string
-        description: Check-in date in YYYY-MM-DD format (e.g., "2025-08-01")
-      - name: checkout_date
-        type: string
-        description: Check-out date in YYYY-MM-DD format (e.g., "2025-08-06")
-      - name: adults
-        type: integer
-        description: Number of adults (default: 1)
-      - name: children
-        type: integer
-        description: Number of children (default: 0)
-      - name: infants
-        type: integer
-        description: Number of infants (default: 0)
-      - name: pets
-        type: integer
-        description: Number of pets (default: 0)
-      - name: price_max
-        type: integer
-        description: Maximum price per night (default: 1000)
-      - name: max_pages
-        type: integer
-        description: Maximum number of pages to scrape (default: 3)
-  - name: scrape_airbnb_listing_info
-    description: Scrapes comprehensive details from a single Airbnb listing URL
-    parameters:
-      - name: url
-        type: string
-        description: Airbnb listing URL with optional query parameters
-      - name: max_retries
-        type: integer
-        description: Number of retry attempts (default: 3)
-auth: []
-entrypoint: uvx python main.py
+# smithery.yaml
+version: 1
+build:
+  # Command to install dependencies
+  install: pip install -r requirements.txt
+  # Command to start your server
+  # We use the python file directly. Smithery handles the rest.
+  start: python main.py
