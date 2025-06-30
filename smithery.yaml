@@ -1,26 +1,14 @@
-runtime: "container"
-build:
-  dockerfile: "Dockerfile"          # Path to your Dockerfile
-  dockerBuildPath: "."              # Docker build context (current directory)
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
 startCommand:
-  type: "http"
-  configSchema:                     # JSON Schema for configuration
-    type: "object"
-    properties:
-      # Define any configuration parameters your MCP server might need.
-      # For example, if you had an API key for a third-party service:
-      # api_key:
-      #   type: "string"
-      #   description: "Your API key for the service."
-      #   secret: true # Mark as secret if it's sensitive
-      # If your server doesn't take any direct config parameters,
-      # you can leave properties empty or just specify common ones like:
-      log_level:
-        type: "string"
-        description: "Set the logging level (e.g., INFO, DEBUG)."
-        default: "INFO"
-    # required: ["api_key"] # Uncomment and list required fields here
-  exampleConfig:
-    # Provide an example configuration.
-    # log_level: "INFO"
-    # api_key: "sk-example123" # Use a placeholder for secrets
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+  commandFunction:
+    # A JS function that produces the CLI command based on the given config to start the MCP on stdio.
+    |-
+    (config) => ({
+      command: 'python3',
+      args: ['main.py'],
+    })

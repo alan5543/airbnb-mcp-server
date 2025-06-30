@@ -613,13 +613,7 @@ async def scrape_airbnb_listing_info(url: str, max_retries: int = 3) -> str:
 
 
 
-
-def main():
-    logger.info("Starting Airbnb MCP server...") 
-    mcp.run()
+if __name__ == "__main__":
+    logger.info("Starting Airbnb MCP server...")
+    mcp.run(transport='stdio')
     logger.info("Airbnb MCP server stopped.")
-
-# if __name__ == "__main__":
-#     logger.info("Starting Airbnb MCP server...")
-#     mcp.run(transport='stdio')
-#     logger.info("Airbnb MCP server stopped.")
