@@ -68,14 +68,12 @@ To set up the Airbnb Scraper MCP Server locally:
    ```bash
    git clone <repository-url>
    ```
+
 2. **Set Up UV**:
    Install UV (a Python package and project manager). Follow the official UV documentation for installation instructions.
-3. **Install Dependencies**:
-   Install required Python packages using UV:
-   ```bash
-   uv pip install requests beautifulsoup4 httpx
-   ```
-4. **Configure MCP Client**:
+
+  
+3. **Configure MCP Client**:
    Add the following to your MCP client configuration (e.g., Claude Desktop):
    ```json
    "airbnb-mcp-server": {
